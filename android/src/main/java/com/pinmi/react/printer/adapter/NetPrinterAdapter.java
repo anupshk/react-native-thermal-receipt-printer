@@ -204,8 +204,10 @@ public class NetPrinterAdapter implements PrinterAdapter {
             public void run() {
                 try {
                     byte[] bytes = Base64.decode(rawData, Base64.DEFAULT);
+                    byte[] cutCommand = new byte[]{29, 86, 66, 1};
                     OutputStream printerOutputStream = socket.getOutputStream();
                     printerOutputStream.write(bytes, 0, bytes.length);
+                    printerOutputStream.write(cutCommand,0, cutCommand.length);
                     printerOutputStream.flush();
                 } catch (IOException e) {
                     Log.e(LOG_TAG, "failed to print data" + rawData);
