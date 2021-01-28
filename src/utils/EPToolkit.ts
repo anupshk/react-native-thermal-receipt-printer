@@ -109,7 +109,7 @@ export function exchange_text(text: string, options: IOptions): Buffer {
 
   // add option bytes
   for (const key in m_options) {
-    if (typeof m_options[key] === "boolean" && options_controller[key])
+    if (typeof m_options[key] === "boolean" && m_options[key] === true && options_controller[key])
       bytes.concat(options_controller[key]);
   }
   return bytes.toBuffer();
